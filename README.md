@@ -1,6 +1,8 @@
 # Sistema de Gestión de Secretaría Académica (Lista, Cola y Pila)
 
 **Asignatura:** Estructuras de Datos  
+**Unidad:** Unidad 3 - Estructuras de Datos Lineales Dinámicas  
+**Actividad:** Actividad de Aprendizaje Unidad 3  
 **Programa:** Ingeniería de Software  
 **IES:** Universidad de Cartagena (Centro Tutorial Cereté)  
 **Tutor:** John Carlos Arrieta Arrieta  
