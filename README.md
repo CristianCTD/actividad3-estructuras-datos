@@ -4,7 +4,7 @@
 **Unidad:** Unidad 3 - Estructuras de Datos Lineales Dinámicas  
 **Actividad:** Actividad de Aprendizaje Unidad 3  
 **Programa:** Ingeniería de Software  
-**IES:** Universidad de Cartagena (Centro Tutorial Cereté)  
+**IES:** Universidad de Cartagena  
 **Tutor:** John Carlos Arrieta Arrieta  
 **Estudiante:** Cristian Torres  
 **Ejercicio Asignado:** N.º 30 - Secretaría Académica (`TramiteAcademico` / `numeroRadicado`)
