@@ -1,11 +1,3 @@
-/**
- * Clase Pila: Implementacion de una Pila LIFO (Last-In, First-Out) personalizada.
- * Los elementos se apilan y desapilan por la cima.
- * 
- * Asignatura: Estructuras de Datos
- * Docente: John Carlos Arrieta Arrieta
- * Estudiante: Cristian Torres
- */
 public class Pila {
     private Nodo cima;
     private int tamanio;
@@ -23,9 +15,6 @@ public class Pila {
         return tamanio;
     }
 
-    /**
-     * Inserta un elemento en el tope de la pila (apilar / push)
-     */
     public void apilar(Object dato) {
         Nodo nuevo = new Nodo(dato);
         nuevo.setSiguiente(cima);
@@ -33,9 +22,6 @@ public class Pila {
         tamanio++;
     }
 
-    /**
-     * Extrae y retorna el elemento en el tope de la pila (desapilar / pop)
-     */
     public Object desapilar() {
         if (esVacia()) {
             return null;
@@ -46,9 +32,6 @@ public class Pila {
         return dato;
     }
 
-    /**
-     * Consulta el elemento en la cima sin desapilarlo (peek)
-     */
     public Object peek() {
         if (esVacia()) {
             return null;
@@ -56,16 +39,10 @@ public class Pila {
         return cima.getDato();
     }
 
-    /**
-     * Verifica si un elemento se encuentra en la pila
-     */
     public boolean contiene(Object dato) {
         return buscar(dato) != null;
     }
 
-    /**
-     * Busca un objeto en la pila y retorna su instancia si existe
-     */
     public Object buscar(Object dato) {
         if (esVacia() || dato == null) {
             return null;
@@ -80,17 +57,11 @@ public class Pila {
         return null;
     }
 
-    /**
-     * Limpia la pila
-     */
     public void limpiar() {
         cima = null;
         tamanio = 0;
     }
 
-    /**
-     * Muestra los elementos desde la cima hacia la base (del mas reciente al mas antiguo)
-     */
     public void mostrar() {
         if (esVacia()) {
             System.out.println("   [Pila vacia - No hay elementos procesados en historial]");

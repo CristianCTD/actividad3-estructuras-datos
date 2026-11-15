@@ -1,22 +1,14 @@
 import java.util.Objects;
 
-/**
- * Entidad principal del Caso 30: Secretaria Academica.
- * Identificador principal: numeroRadicado.
- * 
- * Asignatura: Estructuras de Datos
- * Docente: John Carlos Arrieta Arrieta
- * Estudiante: Cristian Torres
- */
 public class TramiteAcademico {
-    private String numeroRadicado;       // Identificador principal (ej. "RAD-2026-001")
-    private String estudiante;           // Nombre completo del estudiante solicitante
-    private String documentoEstudiante;  // Cedula / T.I.
-    private String programaAcademico;    // "Ingenieria de Software"
-    private String tipoTramite;          // "Certificado de Notas", "Homologacion", "Cancelacion", etc.
-    private String fechaSolicitud;       // Fecha de radicacion
-    private String estado;               // "REGISTRADO", "PENDIENTE", "PROCESADO", "CANCELADO"
-    private String descripcion;          // Detalle o motivo de la solicitud
+    private String numeroRadicado;
+    private String estudiante;
+    private String documentoEstudiante;
+    private String programaAcademico;
+    private String tipoTramite;
+    private String fechaSolicitud;
+    private String estado;
+    private String descripcion;
 
     public TramiteAcademico() {
     }
@@ -34,7 +26,6 @@ public class TramiteAcademico {
         this.descripcion = descripcion;
     }
 
-    // Getters y Setters
     public String getNumeroRadicado() {
         return numeroRadicado;
     }
@@ -99,9 +90,6 @@ public class TramiteAcademico {
         this.descripcion = descripcion;
     }
 
-    /**
-     * Regla de la rubrica: El metodo equals() debe comparar por el identificador principal
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

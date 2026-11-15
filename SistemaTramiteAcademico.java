@@ -2,17 +2,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-/**
- * Clase de ejecucion y menu principal: SistemaTramiteAcademico.
- * Integra las 3 estructuras de datos:
- * - Lista: Registro general de todos los tramites
- * - Cola: Tramites pendientes por atender en orden de llegada (FIFO)
- * - Pila: Historial de tramites procesados (LIFO) y deshacer ultimo procesamiento
- * 
- * Asignatura: Estructuras de Datos
- * Docente: John Carlos Arrieta Arrieta
- * Estudiante: Cristian Torres
- */
 public class SistemaTramiteAcademico {
 
     private Lista listaGeneral;
@@ -28,9 +17,6 @@ public class SistemaTramiteAcademico {
         cargarDatosIniciales();
     }
 
-    /**
-     * Precarga datos demostrativos para facilitar la sustentacion y validacion
-     */
     private void cargarDatosIniciales() {
         TramiteAcademico t1 = new TramiteAcademico(
             "RAD-2026-001", "Cristian Torres", "1067890123",
@@ -48,7 +34,6 @@ public class SistemaTramiteAcademico {
             "2026-11-14", "PENDIENTE", "Motivos laborales y viaje temporal"
         );
 
-        // Registro segun regla obligatoria: listaGeneral y colaPendientes
         listaGeneral.agregar(t1);
         colaPendientes.encolar(t1);
 
@@ -127,13 +112,11 @@ public class SistemaTramiteAcademico {
         System.out.println("===============================================================");
     }
 
-    // 1. Registrar elemento
     private void registrarElemento() {
         System.out.println("--- [1] REGISTRAR NUEVO TRAMITE ACADEMICO ---");
         System.out.print("Ingrese numero de radicado (ej. RAD-2026-004): ");
         String radicado = scanner.nextLine().trim();
 
-        // Validacion de no duplicidad en lista general
         TramiteAcademico dummy = new TramiteAcademico();
         dummy.setNumeroRadicado(radicado);
         if (listaGeneral.contiene(dummy)) {
@@ -163,28 +146,24 @@ public class SistemaTramiteAcademico {
             radicado, estudiante, doc, programa, tipo, fechaActual, "PENDIENTE", descripcion
         );
 
-        // Regla obligatoria: listaGeneral.agregar y colaPendientes.encolar
         listaGeneral.agregar(nuevo);
         colaPendientes.encolar(nuevo);
 
         System.out.println("[Exito] Tramite " + radicado + " registrado en la lista y encolado como pendiente.");
     }
 
-    // 2. Ver todos los elementos registrados (Lista)
     private void verTodosLosElementos() {
         System.out.println("--- [2] TODOS LOS ELEMENTOS REGISTRADOS (LISTA GENERAL) ---");
         System.out.println("Total en sistema: " + listaGeneral.cuentaElementos() + " tramites.");
         listaGeneral.mostrarAdelante();
     }
 
-    // 3. Ver elementos pendientes (Cola)
     private void verElementosPendientes() {
         System.out.println("--- [3] ELEMENTOS PENDIENTES POR ATENDER (COLA FIFO) ---");
         System.out.println("Total pendientes: " + colaPendientes.tamanio() + " tramites.");
         colaPendientes.mostrar();
     }
 
-    // 4. Procesar siguiente elemento (Cola -> Pila)
     private void procesarSiguienteElemento() {
         System.out.println("--- [4] PROCESAR SIGUIENTE ELEMENTO PENDIENTE ---");
         if (colaPendientes.esVacia()) {
@@ -192,9 +171,6 @@ public class SistemaTramiteAcademico {
             return;
         }
 
-        // Regla obligatoria:
-        // Elemento procesado = (Elemento) colaPendientes.desencolar();
-        // historialProcesados.apilar(procesado);
         TramiteAcademico procesado = (TramiteAcademico) colaPendientes.desencolar();
         procesado.setEstado("PROCESADO");
         historialProcesados.apilar(procesado);
@@ -204,14 +180,12 @@ public class SistemaTramiteAcademico {
         System.out.println("El tramite paso del frente de la Cola al tope de la Pila de historial.");
     }
 
-    // 5. Ver historial de elementos procesados (Pila)
     private void verHistorialProcesados() {
         System.out.println("--- [5] HISTORIAL DE ELEMENTOS PROCESADOS (PILA LIFO) ---");
         System.out.println("Total procesados: " + historialProcesados.tamanio() + " tramites.");
         historialProcesados.mostrar();
     }
 
-    // 6. Buscar elemento por codigo
     private void buscarElementoPorCodigo() {
         System.out.println("--- [6] BUSCAR TRAMITE POR NUMERO DE RADICADO ---");
         System.out.print("Ingrese el numero de radicado a buscar: ");
@@ -236,7 +210,6 @@ public class SistemaTramiteAcademico {
         }
     }
 
-    // 7. Cancelar elemento pendiente (Uso de Cola Auxiliar obligatoria)
     private void cancelarElementoPendiente() {
         System.out.println("--- [7] CANCELAR ELEMENTO PENDIENTE (COLA AUXILIAR) ---");
         if (colaPendientes.esVacia()) {
@@ -251,20 +224,18 @@ public class SistemaTramiteAcademico {
         boolean encontrado = false;
         TramiteAcademico cancelado = null;
 
-        // Regla obligatoria: Debe resolverse usando una cola auxiliar. No eliminar directamente desde el centro.
         while (!colaPendientes.esVacia()) {
             TramiteAcademico actual = (TramiteAcademico) colaPendientes.desencolar();
             if (actual.getNumeroRadicado().equalsIgnoreCase(radicado) && !encontrado) {
                 encontrado = true;
                 actual.setEstado("CANCELADO");
                 cancelado = actual;
-                // NO se encola en la cola auxiliar (queda removido de la cola de pendientes)
+
             } else {
                 colaAuxiliar.encolar(actual);
             }
         }
 
-        // Restaurar elementos no cancelados a la cola original respetando el orden FIFO
         while (!colaAuxiliar.esVacia()) {
             colaPendientes.encolar(colaAuxiliar.desencolar());
         }
@@ -277,7 +248,6 @@ public class SistemaTramiteAcademico {
         }
     }
 
-    // 8. Deshacer ultimo procesamiento (Pila -> Cola)
     private void deshacerUltimoProcesamiento() {
         System.out.println("--- [8] DESHACER ULTIMO PROCESAMIENTO ---");
         if (historialProcesados.esVacia()) {
@@ -285,9 +255,6 @@ public class SistemaTramiteAcademico {
             return;
         }
 
-        // Regla obligatoria:
-        // Elemento ultimo = (Elemento) historialProcesados.desapilar();
-        // colaPendientes.encolar(ultimo);
         TramiteAcademico ultimo = (TramiteAcademico) historialProcesados.desapilar();
         ultimo.setEstado("PENDIENTE");
         colaPendientes.encolar(ultimo);
@@ -297,7 +264,6 @@ public class SistemaTramiteAcademico {
         System.out.println("El tramite fue desapilado del historial y reincorporado a la Cola de pendientes.");
     }
 
-    // 9. Ver cantidad de elementos
     private void verCantidadElementos() {
         System.out.println("--- [9] RESUMEN DE CANTIDAD DE ELEMENTOS ---");
         System.out.println(" - Total registrados en Lista General: " + listaGeneral.cuentaElementos());

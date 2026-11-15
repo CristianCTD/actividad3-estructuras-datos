@@ -1,28 +1,14 @@
-/**
- * Clase Nodo: Componente base para estructuras lineales enlazadas.
- * Implementa referencias bidireccionales (siguiente/anterior o derecha/izquierda)
- * para dar soporte a Listas Doblemente Enlazadas, Colas y Pilas.
- * 
- * Asignatura: Estructuras de Datos
- * Docente: John Carlos Arrieta Arrieta
- * Estudiante: Cristian Torres
- */
 public class Nodo {
     private Object dato;
-    private Nodo siguiente; // Referencia hacia adelante / derecha
-    private Nodo anterior;  // Referencia hacia atras / izquierda
+    private Nodo siguiente;
+    private Nodo anterior;
 
-    /**
-     * Constructor del Nodo
-     * @param dato Objeto de informacion almacenado en el nodo
-     */
     public Nodo(Object dato) {
         this.dato = dato;
         this.siguiente = null;
         this.anterior = null;
     }
 
-    // Getters y Setters estandar
     public Object getDato() {
         return dato;
     }
@@ -47,7 +33,6 @@ public class Nodo {
         this.anterior = anterior;
     }
 
-    // Nomenclatura alternativa requerida por la rubrica (derecha / izquierda)
     public Nodo getDerecha() {
         return siguiente;
     }
